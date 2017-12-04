@@ -2,10 +2,10 @@ var https = require("https");
 
 var requestOptions = {
     host: "sytantris.github.io",
-    path: "/http-examples/step3.html"
+    path: "/http-examples/step4.html"
 };
 
-function getAndPrintHTML(options){
+function getHTML(options, callback){
   var appendedData = [];
 
   https.get(options, function(response){
@@ -13,23 +13,25 @@ function getAndPrintHTML(options){
     response.setEncoding('utf8');
 
     response.on('data', function (data){
-      // console.log("Received the chunk. The length is: ", data.length);
-      // console.log(data);
       var appendedData = data.split();
-      // appendedData.push(data);
       for (chunks in appendedData){
-        console.log(appendedData[chunks]);
+        printHTML(appendedData[chunks]);
       }
     });
 
     response.on('end', function(){
-      console.log('Response stream complete');
+    console.log('Response stream complete');
     })
 
   });
 
-  return console.log(appendedData);
+  // return callback(appendedData);
+  // return console.log(appendedData);
 
 }
 
-getAndPrintHTML(requestOptions);
+function printHTML(html){
+  console.log(html);
+}
+
+getHTML(requestOptions, printHTML);
