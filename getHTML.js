@@ -15,7 +15,7 @@ function getHTML(options, callback){
     response.on('data', function (data){
       var appendedData = data.split();
       for (chunks in appendedData){
-        printHTML(appendedData[chunks]);
+        callback(appendedData[chunks]);
       }
     });
 
