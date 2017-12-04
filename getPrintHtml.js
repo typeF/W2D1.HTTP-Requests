@@ -1,7 +1,7 @@
-var https = require('https');
+var https = require("https");
 
-function HTMLChunks(){
-
+function getAndPrintHTML(){
+  var appendedData = [];
   var requestOptions = {
     host: "sytantris.github.io",
     path: "/http-examples/step1.html"
@@ -13,15 +13,19 @@ function HTMLChunks(){
 
     response.on('data', function (data){
       console.log("Received the chunk. The length is: ", data.length);
-      console.log(data + "\n");
+      // console.log(data);
+      appendedData.push(data);
+      console.log(appendedData);
     });
 
     response.on('end', function(){
       console.log('Response stream complete');
-    });
+    })
 
   });
 
+  return console.log(appendedData);
+
 }
 
-HTMLChunks();
+getAndPrintHTML();
